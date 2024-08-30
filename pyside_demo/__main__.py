@@ -1,4 +1,5 @@
-from PySide2.QtWidgets import QApplication, QWidget, QPushButton, QVBoxLayout, QLayout
+from . import model 
+from PySide2.QtWidgets import QApplication, QWidget, QPushButton, QVBoxLayout, QLayout, QTableView
 
 import sys
 from pathlib import Path
@@ -38,6 +39,11 @@ class TestWindow(QWidget):
         layout = QVBoxLayout()
         for _ in range(3):
             layout = self._add_buttton(layout)
+        
+        self._model = model.DoubleListModel(["This", "be", "a", "row"], ["OOF!"])
+        self._table = QTableView()
+        self._table.setModel(self._model)
+        layout.addWidget(self._table)
         self.setLayout(layout)
 
     def _add_buttton(self, layout: QLayout) -> QLayout:
