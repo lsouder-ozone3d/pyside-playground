@@ -1,4 +1,5 @@
 from . import model 
+from . import view
 from PySide2.QtWidgets import QApplication, QWidget, QPushButton, QVBoxLayout, QLayout, QTableView
 
 import sys
@@ -40,10 +41,13 @@ class TestWindow(QWidget):
         for _ in range(3):
             layout = self._add_buttton(layout)
         
-        self._model = model.DoubleListModel(["This", "be", "a", "row"], ["OOF!"])
+        self._model = model.DoubleListModel(["This", "be", "a", "row"], ["OOF!", "more", "items", "hi"])
         self._table = QTableView()
         self._table.setModel(self._model)
+        self._double_list_view = view.DoubleListView()
+        self._double_list_view.setModel(self._model)
         layout.addWidget(self._table)
+        layout.addWidget(self._double_list_view)
         self.setLayout(layout)
 
     def _add_buttton(self, layout: QLayout) -> QLayout:
